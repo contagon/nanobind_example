@@ -47,6 +47,8 @@ else()
   find_package(Python 3.8 COMPONENTS Interpreter Development.Module REQUIRED)
 endif()
 
+find_package(Eigen3 CONFIG)
+
 # Run `nanobind.cmake_dir()` from Python to detect where nanobind is installed
 execute_process(
   COMMAND "${Python_EXECUTABLE}" -c "import nanobind; print(nanobind.cmake_dir())"
@@ -77,6 +79,8 @@ nanobind_add_module(
   # Source code goes here
   src/nanobind_example_ext.cpp
 )
+
+target_link_libraries(nanobind_example_ext PUBLIC Eigen3::Eigen)
 
 # Install directive for scikit-build
 install(TARGETS nanobind_example_ext LIBRARY DESTINATION .)
