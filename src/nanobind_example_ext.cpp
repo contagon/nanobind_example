@@ -6,11 +6,12 @@
 namespace nb = nanobind;
 
 using namespace nb::literals;
+using namespace Eigen;
 
-Eigen::Matrix<double,1,1> add(Eigen::Matrix<double,1,1> a, Eigen::Matrix<double,1,1> b=Eigen::Matrix<double,1,1>::Zero(3)){
+Matrix<double,1,1> add(Matrix<double,1,1> a=Matrix<double,1,1>::Zero(), Matrix<double,1,1> b=Matrix<double,1,1>::Zero()){
     return a + b;
 }
 
 NB_MODULE(nanobind_example_ext, m) {
-    m.def("add", &add, "a"_a, "b"_a=Eigen::Matrix<double,1,1>::Zero());
+    m.def("add", &add, "a"_a=Matrix<double,1,1>::Zero(), "b"_a=Matrix<double,1,1>::Zero());
 }
